@@ -18,7 +18,7 @@ end
 Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   #  ensure that that e1 occurs before e2.
   #  page.body is the entire content of the page as a string.
-  flunk "Unimplemented"
+  page.body.index(e1) < page.body.index(e2)
 end
 
 # Make it easier to express checking or unchecking several boxes at once
@@ -42,3 +42,6 @@ Then /^I should see all of the movies$/ do
   page.all('table#movies tr').count.should == Movie.all.count + 1
 end
 
+Then /^I should not see any of the movies$/ do
+  page.all('table#movies tr').count.should == Movie.all.count + 1
+end
