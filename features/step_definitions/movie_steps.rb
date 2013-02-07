@@ -18,7 +18,7 @@ end
 Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   #  ensure that that e1 occurs before e2.
   #  page.body is the entire content of the page as a string.
-  page.body.index(e1) < page.body.index(e2)
+  assert (page.body.index(e1) < page.body.index(e2)), "Wrong sort order"
 end
 
 # Make it easier to express checking or unchecking several boxes at once
@@ -39,9 +39,9 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
 end
 
 Then /^I should see all of the movies$/ do
-  page.all('table#movies tr').count.should == Movie.all.count + 1
+  assert (page.all('table#movies tr').count.should == Movie.all.count + 1), "All movies not shown"
 end
 
 Then /^I should not see any of the movies$/ do
-  page.all('table#movies tr').count.should == Movie.all.count + 1
+  assert (page.all('table#movies tr').count.should == Movie.all.count + 1), "All movies not shown"
 end
